@@ -83,7 +83,7 @@ function prefetchDeckImages() {
 
 // PLAYER MUST INPUT A NAME BEFORE JOINING THE GAME
 function inputName() {
-  let $inputName = $('<input>', {'type': 'text', 'id': 'input-name', 'formmethod': 'post', 'size': '20', 'maxlength': '20', 'placeholder': 'who are you?'});
+  let $inputName = $('<input>', {'type': 'text', 'id': 'input-name', 'formmethod': 'post', 'size': '20', 'maxlength': '20', 'placeholder': 'Entre ton pseudo'});
   let $submitName = $('<input>', {'type': 'submit', 'id': 'submit-name', 'value': 'GO'});
   $('body').append($inputName);
   //$('body').append($submitName);
@@ -99,9 +99,9 @@ function inputName() {
         socket.emit('new user', { name: player.name });
         setUpTable();
       } else {
-        $('#input-name').attr("placeholder", "enter a name!");
+        $('#input-name').attr("placeholder", "Entre un pseudo!");
         setTimeout(function() {
-          $('#input-name').attr('placeholder', 'who are you?');
+          $('#input-name').attr('placeholder', 'Entre ton pseudo');
         }, 1000);
       }
     };
@@ -117,9 +117,9 @@ function inputName() {
       socket.emit('new user', { name: player.name });
       setUpTable();
     } else {
-      $('#input-name-change').attr("placeholder", "enter a name!");
+      $('#input-name-change').attr("placeholder", "Entre un pseudo!");
       setTimeout(function() {
-        $('#input-name-change').attr('placeholder', 'change your name');
+        $('#input-name-change').attr('placeholder', 'Changer ton pseudo');
       }, 1000);
     }
   });
@@ -136,8 +136,8 @@ function setUpTable () {
 
   let $banner = ($('<div>', {'class': 'banner'}));
   let $moneyBox = ($('<div>', {'class': 'text-container', 'id': 'money-box'}));
-  let $playerMoney = ($('<div>', {'class': 'text-box hidden', 'id': 'player-money'})).html(`<span>Money <p>$${player.money}</p> </span>`);
-  let $playerBet = ($('<div>', {'class': 'text-box hidden', 'id': 'player-bet'})).html(`<span>Bet <p>$${player.bet}</p> </span>`);
+  let $playerMoney = ($('<div>', {'class': 'text-box hidden', 'id': 'player-money'})).html(`<span>LKD <p>$${player.money}</p> </span>`);
+  let $playerBet = ($('<div>', {'class': 'text-box hidden', 'id': 'player-bet'})).html(`<span>Mise <p>$${player.bet}</p> </span>`);
   let $messageBox = ($('<div>', {'class': 'text-container', 'id': 'message-box'}));
   let $message = ($('<div>', {'class': 'text-box', 'id': 'message'}));
   let $totalBox = ($('<div>', {'class': 'text-container', 'id': 'total-box'}));
@@ -145,10 +145,10 @@ function setUpTable () {
   let $dealerTotal = ($('<div>', {'class': 'text-box hidden', 'id': 'dealer-box'})).html('<span id="dealer-total">Dealer <p>0</p> </span>');
 
   let $buttons = ($('<div>', {'id': 'button-bar'}));
-  let $hitButton = ($('<button>', {'class': 'button removed subdued', 'id': 'hit-button'})).text('HIT');
-  let $standButton = ($('<button>', {'class': 'button removed subdued', 'id': 'stand-button'})).text('STAND');
-  let $doubleButton = ($('<button>', {'class': 'button removed subdued', 'id': 'double-button'})).text('DOUBLE');
-  let $splitButton = ($('<button>', {'class': 'button removed subdued', 'id': 'split-button'})).text('SPLIT');
+  let $hitButton = ($('<button>', {'class': 'button removed subdued', 'id': 'hit-button'})).text('Tirer');
+  let $standButton = ($('<button>', {'class': 'button removed subdued', 'id': 'stand-button'})).text('Rester');
+  let $doubleButton = ($('<button>', {'class': 'button removed subdued', 'id': 'double-button'})).text('Doubler');
+  let $splitButton = ($('<button>', {'class': 'button removed subdued', 'id': 'split-button'})).text('Splitter');
 
   let $menuButton = $('<div>', {'id': 'menu-button'}).html('<i class="fa fa-bars" aria-hidden="true"></i>');
   let $menuButtons = $('<div>', {'id': 'menu-buttons'}).slideUp();
@@ -157,15 +157,15 @@ function setUpTable () {
   let $quitButton = $('<div>', {'id': 'quit-button', 'class': 'menu-button'}).html('<i class="fa fa-sign-out" aria-hidden="true"></i>');
   let $soundButton = $('<div>', {'id': 'sound-button', 'class': 'menu-button'}).html('<i class="fa fa-volume-up" aria-hidden="true"></i>');
 
-  let $profileGreeting = $('<p>', {'id': 'profile-greeting'}).html(`Hi, ${player.name}!<br/>Don't like being called ${player.name}?`);
-  let $inputNameChange = $('<input>', {'type': 'text', 'id': 'input-name-change', 'formmethod': 'post', 'size': '20', 'maxlength': '20', 'placeholder': 'change your name'});
+  let $profileGreeting = $('<p>', {'id': 'profile-greeting'}).html(`Hi, ${player.name}!<br/>Tu n'aimes pas ${player.name}?`);
+  let $inputNameChange = $('<input>', {'type': 'text', 'id': 'input-name-change', 'formmethod': 'post', 'size': '20', 'maxlength': '20', 'placeholder': 'Changer ton pseudo'});
   let $submitNameChange = $('<input>', {'type': 'submit', 'id': 'submit-name-change', 'value': 'CHANGE'});
 
   let $infoPanelOverlay = $('<div>', {'id': 'info-panel-overlay', 'style': 'display: none'});
   let $infoPanel = $('<div>', {'id': 'info-panel'});
   let $infoContent = $('<p>', {'id': 'info-content', 'class': 'menu-content'});
   let $profileContent = $('<div>', {'id': 'profile-content', 'class': 'menu-content'}).hide();
-  let $quitContent = $('<div>', {'id': 'quit-content', 'class': 'menu-content'}).html('<p>Do you want to quit?</p>').hide();
+  let $quitContent = $('<div>', {'id': 'quit-content', 'class': 'menu-content'}).html('<p>Quitter ?</p>').hide();
   let $soundContent = $('<div>', {'id': 'sound-content', 'class': 'menu-content'}).hide();
   let $quitConfirmButton = $('<button>', {'id': 'quit-confirm-button'}).text('QUIT');
 
@@ -178,9 +178,9 @@ function setUpTable () {
   let $chatMessages = $('<div>', {'id': 'chat-messages'});
   let $chatForm = $('<form>', {'id': 'chat-form', 'action': ''});
   let $chatInput = $('<input>', {'id': 'chat-input', 'autocomplete': 'off'});
-  let $chatSubmit = $('<button>', {'id': 'chat-submit'}).text('SEND');
+  let $chatSubmit = $('<button>', {'id': 'chat-submit'}).text('Go');
 
-  $credits = $('<div>', {'id': 'credits', 'class': 'info-content'}).html('<p>©2017 Ryan Edwards</p><p>Sounds from <a href="https://www.zapsplat.com">zapsplat.com</a> and <a href="http://kenney.nl/">kenney.nl</a></p>');
+  $credits = $('<div>', {'id': 'credits', 'class': 'info-content'}).html('<p>©2019 n1ce</p><p>Sons de<a href="https://www.zapsplat.com">zapsplat.com</a> et <a href="http://kenney.nl/">kenney.nl</a></p>');
   $description = $('<div>', {'id': 'description', 'class':'info-content'}).html("<h2>What is Blackjack?</h2><br/><p>In Blackjack, players face off against the dealer. The dealer and the players each initially get two cards. The players can only see one of the dealer's cards. The cards are worth face value, except Aces and face cards (J, Q, K), which are 1 or 11 and 10, respectively.</p><br/>"
     +"<p>Each player's goal is to get the sum of their cards higher than the sum of the dealer's cards, without that sum going over 21 ('BUST'). To join a game, each player must bet an amount of money.</p><br/>"
     +"<p>After the initial two-card deal, if the dealer has a blackjack, meaning their two cards add up to 21 (meaning an ace and a 10/J/Q/K), the game is immediately over and everyone at the table who does not also have a blackjack loses. Players who do have blackjack get only their initial bet back ('PUSH'). If the dealer does not have a blackjack, players who do have blackjack automatically win, and even get paid out 1.5x on top of their original bet!</p><br/>"
@@ -291,14 +291,14 @@ function setUpTable () {
               if (name !== '') { 
                 player.name = name;
                 $inputNameChange.val('');
-                $('#profile-greeting').html(`Hi, ${player.name}!<br/>Don't like being called ${player.name}?`);
+                $('#profile-greeting').html(`Hi, ${player.name}!<br/>Tu n'aimes pas ${player.name}?`);
                 $('#player-total').html(`${player.name} <p>${$('#player-total p').text()}</p>`);
                 // let server know there's a new user in town
                 socket.emit('name change', { name: player.name });
               } else {
-                $('#input-name-change').attr("placeholder", "enter a name!");
+                $('#input-name-change').attr("placeholder", "Entre ton pseudo");
                 setTimeout(function() {
-                  $('#input-name-change').attr('placeholder', 'change your name');
+                  $('#input-name-change').attr('placeholder', 'Changer ton pseudo');
                 }, 1000);
               }
             };
@@ -309,13 +309,13 @@ function setUpTable () {
             if (name !== '') {
               player.name = name;
               $inputNameChange.val('');
-              $('#profile-greeting').html(`Hi, ${player.name}!<br/>Don't like being called ${player.name}?`);
+              $('#profile-greeting').html(`Hi, ${player.name}!<br/>Tu n'aimes pas ${player.name}?`);
               // let server know you've changed your name
               socket.emit('name change', { name: player.name });
             } else {
-              $('#input-name-change').attr('placeholder', 'enter a name!');
+              $('#input-name-change').attr('placeholder', 'Entre ton pseudo');
               setTimeout(function() {
-                $('#input-name-change').attr('placeholder', 'change your name');
+                $('#input-name-change').attr('placeholder', 'Changer ton pseudo');
               }, 1000);
             }
           });
@@ -461,7 +461,7 @@ socket.on('new user', function(message) {
 // 'sit invite' CREATES A 'SIT' BUTTON FOR USER TO JOIN GAME AS PLAYER
 // WILL ONLY BE SENT IF THE SERVER'S gameInProgress IS false
 socket.on('sit invite', function() {
-  let $sitButton = $('<button>', {class: 'sit-button', style: 'align-self: flex-start; margin-top: 10px;'}).text('SIT');
+  let $sitButton = $('<button>', {class: 'sit-button', style: 'align-self: flex-start; margin-top: 10px;'}).text('Rejoindre');
 
   // only add if there isn't already a sit button and you're not already playing
   if($('.sit-button').length === 0 && !$('.primary').attr('id')) {
@@ -470,7 +470,7 @@ socket.on('sit invite', function() {
     if(!$._data($('.sit-button')[0], 'events')) {
       $('.sit-button').on('click', function() {
         // tells server that you're joining as player
-        socket.emit('deal me in', {name: player.name, money: player.money});
+        socket.emit('On va niquer des mères!', {name: player.name, money: player.money});
 
         $('#money-box').children().removeClass('hidden');
         $('.primary').attr({'id': 'player-hand'});
@@ -582,7 +582,7 @@ function removePlayer(leftPlayer) {
 function placeBet(turn) {
   let $betForm = $('<div>', {'id': 'bet-form'});
   let $inputBet = $('<input>', {'type': 'text', 'id': 'input-bet', 'min': 1, 'max': `${player.money}`, 'value': `${player.bet || 10}`, 'formmethod': 'post', 'size': '4'});
-  let $submitBet = $('<input>', {'type': 'submit', 'id': 'submit-bet', 'value': 'BET'});
+  let $submitBet = $('<input>', {'type': 'submit', 'id': 'submit-bet', 'value': 'Miser'});
   let $messageBox = $('#message');
 
   // $messageBox.html('<p>Place your bet: </p>');
@@ -1017,7 +1017,7 @@ socket.on('whose turn', function(data) {
   if (data.player.id === socket.id) {
     // if it's your turn...
     if (player.splitHand === null) {
-      $('#message').html('<p>Your turn!</p>');
+      $('#message').html('<p>Ton tour!</p>');
       $('#message p').delay(1000).fadeOut(400, function() {$(this).remove()});
     } else {
       $(`#player-hand-${player.splitHand}`).addClass('selected');
@@ -1109,7 +1109,7 @@ socket.on('turn over', function() {
     } else if (player.total === 21 && player.hand.length === 2) {
       player.money += (player.bet + (player.bet * 1.5));
       //$('#message').append($('<p>').text(`BLACKJACK! YOU WIN $${player.bet * 1.5}!`).delay(1000).fadeOut());
-      $('#message').html(`<p>BLACKJACK! YOU WIN $${player.bet * 1.5}!</p>`);
+      $('#message').html(`<p>BLACKJACK! GG, TU GAGNES LKD${player.bet * 1.5}!</p>`);
       $('#message p').delay(1000).fadeOut(400, function() {$(this).remove()});
       $('#player-money p').text(`$${centify(player.money)}`);
       $('#player-bet p').html('$0');
@@ -1130,7 +1130,7 @@ socket.on('turn over', function() {
     } else if (player.total[player.splitHand] === 21 && player.hand[player.splitHand].length === 2) {
       player.money += (player.bet + (player.bet * 1.5));
       //$('#message').append($('<p>').text(`BLACKJACK! YOU WIN $${player.bet * 1.5}!`).delay(1000).fadeOut());
-      $('#message').html(`<p>BLACKJACK! YOU WIN $${player.bet * 1.5}!</p>`);
+      $('#message').html(`<p>BLACKJACK! GG, TU GAGNES LKD${player.bet * 1.5}!</p>`);
       $('#message p').delay(1000).fadeOut(400, function() {$(this).remove()});
       $('#player-money p').text(`$${centify(player.money)}`);
       $('#player-bet p').html('$0');
@@ -1246,8 +1246,8 @@ function endGame(dealerHiddenCard, dealerTotal, winStatus, message) {
       $('#button-bar').children().off('click');
       $hitButton.removeClass('subdued');
       $standButton.removeClass('subdued');
-      $hitButton.text("I'M IN");
-      $standButton.text("I'M OUT");
+      $hitButton.text("J'veux jouer encore!");
+      $standButton.text("J'me casse!");
       $hitButton.one('click', resetGame);
       $standButton.one('click', leaveGame);
     
