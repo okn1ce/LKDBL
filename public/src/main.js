@@ -757,10 +757,10 @@ function dealCards(players, dealer) {
     setTimeout(function () {
       $('#player-box').removeClass('hidden');
 
-      $('#hit-button').text('HIT');
+      $('#hit-button').text('Tirer');
       $('#hit-button').removeClass('removed');
 
-      $('#stand-button').text('STAND');
+      $('#stand-button').text('Rester');
       $('#stand-button').removeClass('removed');
 
       $('#double-button').removeClass('removed');
