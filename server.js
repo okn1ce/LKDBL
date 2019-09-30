@@ -231,17 +231,17 @@ function endGame() {
         } else {
           console.log(`${player.name} won!`)
           player.money += player.bet * 2;
-          var message = `YOU WIN $${player.bet}!`;
+          var message = `Tu gagnes ${player.bet} LKD!`;
         }
 
         informUserOfGameOver(player.id, 'win', message);
 
       } else if (dealer.total > player.total && dealer.total <= 21) {
         console.log(`${player.name} lost.`)
-        let message = 'Dealer wins.';
+        let message = 'Croupier gagne.';
 
         if (dealer.total === 21 && dealer.hand.length === 2) {
-          message += ' Dealer has blackjack.';
+          message += ' Croupier possède un blackjack.';
         }
 
         informUserOfGameOver(player.id, 'lose', message);
@@ -366,7 +366,7 @@ io.on('connection', function(socket) {
   //REMOVE FOR PRODUCTION
   
   socket.on('new user', function(data) {
-    console.log(`welcome ${data.name}!`);
+    console.log(`Bienvenue, ${data.name}!`);
 
     users.push({
       id: socket.id,
@@ -374,11 +374,11 @@ io.on('connection', function(socket) {
     });
 
     console.log(`welcoming ${socket.id} (${data.name})`);
-    socket.emit('welcome', {
+    socket.emit('Bienvenue', {
       users: users, 
       currentPlayers: players,
       chatMessages: messages,
-      greeting: `Welcome, ${data.name}`, 
+      greeting: `Bienvenue, ${data.name}`, 
       gameInProgress: gameInProgress
     });
 
@@ -395,8 +395,8 @@ io.on('connection', function(socket) {
       }
     }
 
-    messages.push({name: '::', text: `${data.name} veut niquer des meres`});
-    io.sockets.emit('new user', `${data.name} veut niquer des meres`);
+    messages.push({name: '::', text: `${data.name} has joined`});
+    io.sockets.emit('new user', `${data.name} has joined`);
 
     console.log(users);
     if (players.length < 5 && !gameInProgress) {
