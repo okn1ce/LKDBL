@@ -83,7 +83,7 @@ function prefetchDeckImages() {
 
 // PLAYER MUST INPUT A NAME BEFORE JOINING THE GAME
 function inputName() {
-  let $inputName = $('<input>', {'type': 'text', 'id': 'input-name', 'formmethod': 'post', 'size': '20', 'maxlength': '20', 'placeholder': 'who are you?'});
+  let $inputName = $('<input>', {'type': 'text', 'id': 'input-name', 'formmethod': 'post', 'size': '20', 'maxlength': '20', 'placeholder': 'tu es qui?'});
   let $submitName = $('<input>', {'type': 'submit', 'id': 'submit-name', 'value': 'GO'});
   $('body').append($inputName);
   //$('body').append($submitName);
@@ -136,19 +136,19 @@ function setUpTable () {
 
   let $banner = ($('<div>', {'class': 'banner'}));
   let $moneyBox = ($('<div>', {'class': 'text-container', 'id': 'money-box'}));
-  let $playerMoney = ($('<div>', {'class': 'text-box hidden', 'id': 'player-money'})).html(`<span>Money <p>$${player.money}</p> </span>`);
-  let $playerBet = ($('<div>', {'class': 'text-box hidden', 'id': 'player-bet'})).html(`<span>Bet <p>$${player.bet}</p> </span>`);
+  let $playerMoney = ($('<div>', {'class': 'text-box hidden', 'id': 'player-money'})).html(`<span>LKD <p>${player.money}</p> </span>`);
+  let $playerBet = ($('<div>', {'class': 'text-box hidden', 'id': 'player-bet'})).html(`<span>Mise <p>${player.bet}LKD</p> </span>`);
   let $messageBox = ($('<div>', {'class': 'text-container', 'id': 'message-box'}));
   let $message = ($('<div>', {'class': 'text-box', 'id': 'message'}));
   let $totalBox = ($('<div>', {'class': 'text-container', 'id': 'total-box'}));
   let $playerTotal = ($('<div>', {'class': 'text-box hidden', 'id': 'player-box'})).html(`<span id="player-total">${player.name} <p>0</p> </span>`);
-  let $dealerTotal = ($('<div>', {'class': 'text-box hidden', 'id': 'dealer-box'})).html('<span id="dealer-total">Dealer <p>0</p> </span>');
+  let $dealerTotal = ($('<div>', {'class': 'text-box hidden', 'id': 'dealer-box'})).html('<span id="dealer-total">Croupier <p>0</p> </span>');
 
   let $buttons = ($('<div>', {'id': 'button-bar'}));
-  let $hitButton = ($('<button>', {'class': 'button removed subdued', 'id': 'hit-button'})).text('HIT');
-  let $standButton = ($('<button>', {'class': 'button removed subdued', 'id': 'stand-button'})).text('STAND');
-  let $doubleButton = ($('<button>', {'class': 'button removed subdued', 'id': 'double-button'})).text('DOUBLE');
-  let $splitButton = ($('<button>', {'class': 'button removed subdued', 'id': 'split-button'})).text('SPLIT');
+  let $hitButton = ($('<button>', {'class': 'button removed subdued', 'id': 'hit-button'})).text('Tirer');
+  let $standButton = ($('<button>', {'class': 'button removed subdued', 'id': 'stand-button'})).text('Rester');
+  let $doubleButton = ($('<button>', {'class': 'button removed subdued', 'id': 'double-button'})).text('Doubler');
+  let $splitButton = ($('<button>', {'class': 'button removed subdued', 'id': 'split-button'})).text('Splitter');
 
   let $menuButton = $('<div>', {'id': 'menu-button'}).html('<i class="fa fa-bars" aria-hidden="true"></i>');
   let $menuButtons = $('<div>', {'id': 'menu-buttons'}).slideUp();
@@ -582,7 +582,7 @@ function removePlayer(leftPlayer) {
 function placeBet(turn) {
   let $betForm = $('<div>', {'id': 'bet-form'});
   let $inputBet = $('<input>', {'type': 'text', 'id': 'input-bet', 'min': 1, 'max': `${player.money}`, 'value': `${player.bet || 10}`, 'formmethod': 'post', 'size': '4'});
-  let $submitBet = $('<input>', {'type': 'submit', 'id': 'submit-bet', 'value': 'BET'});
+  let $submitBet = $('<input>', {'type': 'submit', 'id': 'submit-bet', 'value': 'Miser'});
   let $messageBox = $('#message');
 
   // $messageBox.html('<p>Place your bet: </p>');
@@ -666,7 +666,7 @@ function dealCards(players, dealer) {
   $('.hand-player-total').text('');
   $('#dealer-box').addClass('hidden');
 
-  $messageBox.html('<p>Dealing \'em out!</p>');
+  $messageBox.html('<p>Montre leurs que t\'es le boss!</p>');
   $('#message p').delay(1000).fadeOut(400, function() {$(this).remove()});
 
   players.forEach((serverPlayer) => {
@@ -1017,7 +1017,7 @@ socket.on('whose turn', function(data) {
   if (data.player.id === socket.id) {
     // if it's your turn...
     if (player.splitHand === null) {
-      $('#message').html('<p>Your turn!</p>');
+      $('#message').html('<p>Ton tour bg!</p>');
       $('#message p').delay(1000).fadeOut(400, function() {$(this).remove()});
     } else {
       $(`#player-hand-${player.splitHand}`).addClass('selected');
