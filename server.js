@@ -395,8 +395,8 @@ io.on('connection', function(socket) {
       }
     }
 
-    messages.push({name: '::', text: `${data.name} has joined`});
-    io.sockets.emit('new user', `${data.name} has joined`);
+    messages.push({name: '::', text: `${data.name} veut niquer des meres`});
+    io.sockets.emit('new user', `${data.name} veut niquer des meres`);
 
     console.log(users);
     if (players.length < 5 && !gameInProgress) {
